@@ -1,0 +1,58 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: project-learn
+  http:
+    encoding:
+      force: true
+
+  datasource:
+    name: wpailn
+    username: root
+    password: wpailn
+    type: com.alibaba.druid.pool.DruidDataSource
+    url: jdbc:mysql://127.0.0.1:3306/wpailn?characterEncoding=utf8&useSSL=true&serverTimezone=Asia/Shanghai
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    druid:
+      filters: stat,wall,slf4j
+      max-active: 20
+      initial-size: 1
+      min-idle: 1
+      max-wait: 60000
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: select 'x'
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: true
+      max-open-prepared-statements: 20
+
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 100MB
+      max-request-size: 100MB
+
+  redis:
+    host: 192.168.2.68
+    port: 6379
+    timeout: 500
+    password: datacvg123
+    lettuce:
+      pool:
+        max-idle: 50
+        min-idle: 10
+        max-active: 100
+        max-wait: 1000
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+    call-setters-on-nulls: true
+  mapper-locations: classpath:/mapper/*.xml
+  type-aliases-package: com.wp.pojo.domain
+
+
