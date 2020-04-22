@@ -1,13 +1,17 @@
 package com.wp.api;
 
+import com.wp.pojo.domain.User;
 import com.wp.pojo.dto.HandlerResult;
 import com.wp.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -28,5 +32,10 @@ public class UserApi {
             handlerResult.setData(list);
         }
         return handlerResult;
+    }
+
+    @RequestMapping(path = "/register")
+    public HandlerResult register(@RequestBody @Valid User user){
+        return null;
     }
 }
