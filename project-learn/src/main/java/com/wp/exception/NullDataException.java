@@ -4,13 +4,13 @@ import com.wp.pojo.dto.HandlerResult;
 
 public class NullDataException extends BaseException {
 
-    private HandlerResult handlerResult;
+    private HandlerResult<String> handlerResult;
 
     public NullDataException() {
         super();
     }
 
-    public NullDataException(HandlerResult handlerResult) {
+    public NullDataException(HandlerResult<String> handlerResult) {
         super(handlerResult.getMsg());
         this.handlerResult = handlerResult;
     }
@@ -19,7 +19,7 @@ public class NullDataException extends BaseException {
         return handlerResult;
     }
 
-    public void setHandlerResult(HandlerResult handlerResult) {
+    public void setHandlerResult(HandlerResult<String> handlerResult) {
         this.handlerResult = handlerResult;
     }
 }

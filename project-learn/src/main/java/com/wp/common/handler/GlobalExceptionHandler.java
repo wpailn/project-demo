@@ -5,6 +5,7 @@ import com.wp.pojo.dto.HandlerResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,10 +22,12 @@ public class GlobalExceptionHandler {
     public ResponseEntity<HandlerResult> exceptionHandler(Exception e){
         log.error("异常信息======>");
         e.printStackTrace();
+        HandlerResult handlerResult;
         if(e instanceof NullDataException){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(((NullDataException) e).getHandlerResult());
+            handlerResult = ((NullDataException) e).getHandlerResult();
         }else {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new HandlerResult<>(false,500,"系统异常",null));
+            handlerResult = new HandlerResult<>(false,500,e.getMessage(),null);
         }
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(handlerResult);
     }
 }
