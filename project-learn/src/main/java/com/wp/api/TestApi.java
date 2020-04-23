@@ -13,8 +13,15 @@ public class TestApi {
     @Resource
     private DataSource dataSource;
 
+    @RequestMapping(path = "/all")
+    public void all(){
+    }
+
     @RequestMapping(path = "/druid")
     public void druid(){
-        System.out.println("druid");
+    }
+
+    @RequestMapping("/print")
+    public void print(){
     }
 }

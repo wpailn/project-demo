@@ -5,11 +5,10 @@ import lombok.Data;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Data
-public class User {
+public class UserDO {
     @NotBlank(message = "userId 不能为空")
     private String userId;
 
