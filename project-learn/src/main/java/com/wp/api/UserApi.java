@@ -3,6 +3,7 @@ package com.wp.api;
 import com.wp.pojo.domain.UserDO;
 import com.wp.pojo.dto.HandlerResult;
 import com.wp.pojo.dto.UserDTO;
+import com.wp.pojo.vo.UserVO;
 import com.wp.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -31,7 +32,7 @@ public class UserApi {
 
     @RequestMapping(path = "/allUserId",method = RequestMethod.POST)
     @ApiOperation(value = "查询所有用户id", notes = "不需要参数")
-    public HandlerResult allUserId(){
+    public HandlerResult<List<String>> allUserId(){
         HandlerResult<List<String>> handlerResult = new HandlerResult<>();
         List<String> list = userService.selectAllUserId();
         if(CollectionUtils.isEmpty(list)){
@@ -56,7 +57,7 @@ public class UserApi {
     @ApiImplicitParams(
             @ApiImplicitParam(name = "userId", value = "用户id",required = true,paramType = "form",dataType = "String")
     )
-    public HandlerResult userInfo(@Valid @RequestParam(value = "userId") @NotBlank String userId){
+    public HandlerResult<UserVO> userInfo(@Valid @RequestParam(value = "userId") @NotBlank String userId){
         return null;
     }
 }
