@@ -1,4 +1,4 @@
-package com.wp.common.config;
+package com.wp.common.config.swagger;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

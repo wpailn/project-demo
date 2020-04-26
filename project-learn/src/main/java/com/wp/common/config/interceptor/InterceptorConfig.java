@@ -1,4 +1,4 @@
-package com.wp.common.config;
+package com.wp.common.config.interceptor;
 
 import com.wp.common.interceptor.FirstInterceptor;
 import com.wp.common.interceptor.SecondInterceptor;

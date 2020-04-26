@@ -2,9 +2,10 @@ package com.wp.api;
 
 import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
+import org.ehcache.Cache;
+import org.ehcache.CacheManager;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,14 +23,24 @@ import java.util.Map;
 @Slf4j
 public class TestApi {
 
+    @Value("${mas.url}")
+    private String masUrl;
+
     @Resource
     private DataSource dataSource;
 
     @Resource
     private RestTemplate restTemplate;
 
+    @Resource
+    private CacheManager cacheManager;
+
+
     @RequestMapping(path = "/all",method = RequestMethod.POST)
     public void all(){
+        Cache<String,String> cache = cacheManager.getCache("testCache",String.class,String.class);
+        cache.put("123","wp");
+        System.out.println(cache.get("123"));
     }
 
     @RequestMapping(path = "/druid",method = RequestMethod.POST)
@@ -51,7 +62,7 @@ public class TestApi {
             List<String> list = new ArrayList<>();
             list.add("123456");
             HttpEntity<String> requestEntity = new HttpEntity<>(gson.toJson(list), headers);
-            ResponseEntity<Map> responseEntity = restTemplate.exchange("http://192.168.2.68:9107/api/api/act/started",
+            ResponseEntity<Map> responseEntity = restTemplate.exchange(masUrl+"/act/started",
                     HttpMethod.POST,requestEntity,Map.class);
 
             openResult = responseEntity.getBody();

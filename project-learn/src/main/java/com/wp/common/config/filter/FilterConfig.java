@@ -1,4 +1,4 @@
-package com.wp.common.config;
+package com.wp.common.config.filter;
 
 import com.wp.common.filter.FirstFilter;
 import com.wp.common.filter.SecondFilter;
