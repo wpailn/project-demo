@@ -2,6 +2,7 @@ package com.wp.common.config.http;
 
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
@@ -9,6 +10,7 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
 
+@Configuration
 public class RestTemplateConfig {
 
     @Resource
