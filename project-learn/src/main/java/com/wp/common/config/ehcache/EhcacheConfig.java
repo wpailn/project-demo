@@ -1,9 +1,13 @@
 package com.wp.common.config.ehcache;
 
-import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@EnableCaching
 public class EhcacheConfig {
+
+    @Bean(initMethod = "init", destroyMethod = "destroy")
+    public EhcacheManager ehcacheManager(){
+        return new EhcacheManager();
+    }
 }

@@ -1,6 +1,7 @@
 package com.wp.api;
 
 import com.google.gson.Gson;
+import com.wp.common.config.ehcache.EhcacheManager;
 import lombok.extern.slf4j.Slf4j;
 import org.ehcache.Cache;
 import org.ehcache.CacheManager;
@@ -33,12 +34,12 @@ public class TestApi {
     private RestTemplate restTemplate;
 
     @Resource
-    private CacheManager cacheManager;
+    private EhcacheManager ehcacheManager;
 
 
     @RequestMapping(path = "/all",method = RequestMethod.POST)
     public void all(){
-        Cache<String,String> cache = cacheManager.getCache("testCache",String.class,String.class);
+        Cache<String,String> cache = ehcacheManager.getCacheManager().getCache("cache1",String.class,String.class);
         cache.put("123","wp");
         System.out.println(cache.get("123"));
     }
@@ -51,26 +52,4 @@ public class TestApi {
     public void print(){
     }
 
-    @RequestMapping(path = "mas",method = RequestMethod.GET)
-    public void mas(){
-        Gson gson = new Gson();
-        Map openResult;
-        try {
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
-            headers.add("userId", "U001");
-            List<String> list = new ArrayList<>();
-            list.add("123456");
-            HttpEntity<String> requestEntity = new HttpEntity<>(gson.toJson(list), headers);
-            ResponseEntity<Map> responseEntity = restTemplate.exchange(masUrl+"/act/started",
-                    HttpMethod.POST,requestEntity,Map.class);
-
-            openResult = responseEntity.getBody();
-
-            log.info("主数据回调应答报文======>{}",gson.toJson(openResult));
-        } catch (RestClientException e) {
-            e.printStackTrace();
-            log.error("主数据回调接口异常");
-        }
-    }
 }
