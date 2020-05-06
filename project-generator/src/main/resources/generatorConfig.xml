@@ -30,7 +30,7 @@
             <property name="nullCatalogMeansCurrent" value="true" />
         </jdbcConnection>
 
-        <javaModelGenerator targetPackage="com.wp.pojo.domain" targetProject="project-learn\src\main\java"/>
+        <javaModelGenerator targetPackage="com.wp.pojo.entity" targetProject="project-learn\src\main\java"/>
 
         <sqlMapGenerator targetPackage="mapper" targetProject="project-learn\src\main\resources"/>
 

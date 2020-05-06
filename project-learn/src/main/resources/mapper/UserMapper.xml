@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.wp.dao.UserMapper">
-  <resultMap id="BaseResultMap" type="com.wp.pojo.domain.UserDO">
+  <resultMap id="BaseResultMap" type="com.wp.pojo.entity.UserDO">
     <id column="user_id" jdbcType="VARCHAR" property="userId" />
     <result column="user_name" jdbcType="VARCHAR" property="userName" />
     <result column="user_password" jdbcType="VARCHAR" property="userPassword" />
@@ -12,13 +12,9 @@
     <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
   </resultMap>
 
-  <sql id="Base_Column_List">
-    user_id, user_name, user_password, user_email, user_birth, user_phone, creat_time, 
-    update_time
-  </sql>
 
-  <select id="select" resultMap="BaseResultMap">
-    SELECT user_id FROM t_user
+  <select id="selectUser" resultMap="BaseResultMap" parameterType="java.lang.String">
+    SELECT  FROM t_user WHERE user_id = #{userId}
   </select>
 
 </mapper>

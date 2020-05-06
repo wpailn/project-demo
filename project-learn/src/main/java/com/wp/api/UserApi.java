@@ -1,6 +1,6 @@
 package com.wp.api;
 
-import com.wp.pojo.domain.UserDO;
+import com.wp.pojo.entity.UserDO;
 import com.wp.pojo.dto.HandlerResult;
 import com.wp.pojo.dto.UserDTO;
 import com.wp.pojo.vo.UserVO;
