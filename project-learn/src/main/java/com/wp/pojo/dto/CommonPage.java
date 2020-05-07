@@ -7,6 +7,10 @@ import org.springframework.data.domain.Page;
 
 import java.util.List;
 
+/**
+ * 分页通用类
+ * @param <T>
+ */
 @Getter
 @Setter
 public class CommonPage<T> {
