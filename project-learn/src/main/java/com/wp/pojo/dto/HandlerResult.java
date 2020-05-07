@@ -2,11 +2,10 @@ package com.wp.pojo.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+@Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
 @ApiModel(description = "应答数据")
@@ -22,4 +21,5 @@ public class HandlerResult<T> {
 
     @ApiModelProperty(value = "应答数据")
     private T data;
+
 }
