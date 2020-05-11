@@ -45,6 +45,7 @@ public class UserApi {
 
     @RequestMapping(path = "/register",method = RequestMethod.POST)
     @ApiOperation(value = "用户注册", notes = "以json格式发送数据")
+    @ApiImplicitParam(name = "user", value = "用户信息",required = true,paramType = "body",dataType = "json")
     public HandlerResult register(@RequestBody @Valid UserDTO user){
         UserDO userDO = new UserDO();
         BeanUtils.copyProperties(user,userDO);
