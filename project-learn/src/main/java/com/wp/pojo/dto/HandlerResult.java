@@ -25,6 +25,14 @@ public class HandlerResult<T> {
     private T data;
 
     /**
+     * 成功返回信息
+     * @param message 返回信息
+     */
+    public static <T> HandlerResult<T> success(String message) {
+        return new HandlerResult<T>(true, CommonCode.SUCCESS.getCode(), CommonCode.SUCCESS.getMessage(), null);
+    }
+
+    /**
      * 成功返回结果
      *
      * @param data 获取的数据
