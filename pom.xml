@@ -9,7 +9,7 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-      <!--<module>project-generator</module>-->
+      <module>project-generator</module>
       <module>project-learn</module>
     </modules>
 
