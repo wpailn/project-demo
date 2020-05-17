@@ -1,6 +1,5 @@
 package com.wp.api;
 
-import com.wp.pojo.entity.UserDO;
 import com.wp.pojo.dto.HandlerResult;
 import com.wp.pojo.dto.UserDTO;
 import com.wp.pojo.vo.UserVO;
@@ -9,7 +8,6 @@ import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
-import org.springframework.beans.BeanUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
