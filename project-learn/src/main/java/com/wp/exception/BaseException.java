@@ -1,10 +1,9 @@
 package com.wp.exception;
 
-public class BaseException extends RuntimeException {
-    public BaseException() {
-        super();
-    }
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
+public class BaseException extends RuntimeException {
     public BaseException(String message, Throwable cause) {
         super(message, cause);
     }

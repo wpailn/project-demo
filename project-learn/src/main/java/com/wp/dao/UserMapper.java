@@ -4,6 +4,7 @@ import com.wp.pojo.entity.UserDO;
 import com.wp.pojo.po.UserPO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -23,6 +24,7 @@ public interface UserMapper {
      * 查询所有用户id
      * @return 所有用户id
      */
+    @Select("SELECT user_id FROM t_user")
     List<String> allUserId();
 
     /**
@@ -30,4 +32,8 @@ public interface UserMapper {
      * @param userDO 用户新增信息
      */
     void insert(UserDO userDO);
+
+    @Select("SELECT COUNT(*) FROM t_user WHERE user_name = #{userName} AND user_password = #{userPassword}")
+    Integer checkUserExist(@Param("userName") String userName,
+                           @Param("userPassword") String userPassword);
 }

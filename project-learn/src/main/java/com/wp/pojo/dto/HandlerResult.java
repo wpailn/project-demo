@@ -26,9 +26,8 @@ public class HandlerResult<T> {
 
     /**
      * 成功返回信息
-     * @param message 返回信息
      */
-    public static <T> HandlerResult<T> success(String message) {
+    public static <T> HandlerResult<T> success() {
         return new HandlerResult<T>(true, CommonCode.SUCCESS.getCode(), CommonCode.SUCCESS.getMessage(), null);
     }
 

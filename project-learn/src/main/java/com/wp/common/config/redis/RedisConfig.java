@@ -10,14 +10,15 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 @Configuration
 public class RedisConfig {
 
-    @Bean(name = "objectRedisTemplate")
-    public RedisTemplate<String, Object> objectRedisTemplate(LettuceConnectionFactory lettuceConnectionFactory) {
+    @Bean(name = "redisTemplateObject")
+    public RedisTemplate<String, Object> redisTemplateObject(LettuceConnectionFactory lettuceConnectionFactory) {
         Jackson2JsonRedisSerializer<Object> jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer<>(Object.class);
         StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
         ObjectMapper om = new ObjectMapper();
@@ -34,4 +35,13 @@ public class RedisConfig {
         template.afterPropertiesSet();
         return template;
     }
+
+    @Bean(name = "redisTemplateString")
+    public RedisTemplate<String, String> redisTemplateString(
+            LettuceConnectionFactory lettuceConnectionFactory) {
+        StringRedisTemplate template = new StringRedisTemplate();
+        template.setConnectionFactory(lettuceConnectionFactory);
+        return template;
+    }
+
 }

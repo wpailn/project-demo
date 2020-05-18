@@ -11,6 +11,14 @@ import java.util.List;
 public interface UserService {
 
     /**
+     * 用户登录获取token
+     * @param loginName 登录名
+     * @param loginPass 登陆密码
+     * @return token值
+     */
+    String userLogin(String loginName, String loginPass);
+
+    /**
      * 根据userId查询用户信息
      * @param userId 用户id
      * @return 用户展示信息

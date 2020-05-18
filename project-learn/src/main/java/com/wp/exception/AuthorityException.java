@@ -10,6 +10,6 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class NullDataException extends BaseException {
+public class AuthorityException extends BaseException {
     private HandlerResult<String> handlerResult;
 }

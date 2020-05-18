@@ -1,5 +1,6 @@
 package com.wp.api;
 
+import com.wp.common.annotation.CheckToken;
 import com.wp.pojo.dto.HandlerResult;
 import com.wp.pojo.dto.UserDTO;
 import com.wp.pojo.vo.UserVO;
@@ -8,6 +9,7 @@ import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,8 +28,23 @@ public class UserApi {
     @Resource
     private UserService userService;
 
+    @RequestMapping(path = "/login", method = RequestMethod.POST)
+    @ApiOperation(value = "用户登录获取token", notes = "需要登录名和密码")
+    @CheckToken(required = false)
+    public HandlerResult<String> login(@RequestParam(value = "loginName") String loginName,
+                                       @RequestParam(value = "loginPass") String loginPass){
+        String token = userService.userLogin(loginName, loginPass);
+        if (StringUtils.isBlank(token)){
+            return HandlerResult.failed("登陆失败");
+        }else {
+            return HandlerResult.success(token);
+        }
+
+    }
+
     @RequestMapping(path = "/allUserId",method = RequestMethod.GET)
     @ApiOperation(value = "查询所有用户id", notes = "不需要参数")
+    @CheckToken
     public HandlerResult<List<String>> allUserId(){
         List<String> list = userService.allUserId();
         if(CollectionUtils.isEmpty(list)){
@@ -39,6 +56,7 @@ public class UserApi {
 
     @RequestMapping(path = "/register",method = RequestMethod.POST)
     @ApiOperation(value = "用户注册", notes = "以json格式发送数据")
+    @CheckToken
     public HandlerResult register(@ApiParam(value = "用户注册信息") @RequestBody @Valid UserDTO user){
         Boolean result = userService.register(user);
         if(result){
@@ -53,6 +71,7 @@ public class UserApi {
     @ApiImplicitParams(
             @ApiImplicitParam(name = "userId", value = "用户id",required = true,paramType = "form",dataType = "String")
     )
+    @CheckToken
     public HandlerResult<UserVO> userInfo(@Valid @RequestParam(value = "userId") @NotBlank String userId){
         UserVO userVO = userService.userInfo(userId);
         if (ObjectUtils.isEmpty(userVO)){

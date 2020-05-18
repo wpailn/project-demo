@@ -42,10 +42,10 @@ spring:
       max-request-size: 100MB
 
   redis:
-    host: 192.168.2.68
+    host: 127.0.0.1
     port: 6379
     timeout: 500
-    password: datacvg123
+    password: wpailn
     lettuce:
       pool:
         max-idle: 50

@@ -1,6 +1,9 @@
 package com.wp.service.impl;
 
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
 import com.wp.dao.UserMapper;
+import com.wp.pojo.constant.SysEnum;
 import com.wp.pojo.dto.UserDTO;
 import com.wp.pojo.entity.UserDO;
 import com.wp.pojo.po.UserPO;
@@ -11,13 +14,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.beans.BeanUtils;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 @Service
 @Slf4j
@@ -25,6 +29,23 @@ public class UserServiceImpl implements UserService {
 
     @Resource
     private UserMapper userMapper;
+
+    @Resource(name = "redisTemplateString")
+    private RedisTemplate<String, String> redisTemplate;
+
+    @Override
+    public String userLogin(String loginName, String loginPass) {
+        Integer num = userMapper.checkUserExist(loginName,loginPass);
+        if(num == 1){
+            //登陆成功，生成token放入redis缓存
+            String token = JWT.create().withAudience(loginName)
+                    .sign(Algorithm.HMAC256(loginPass));
+            redisTemplate.opsForValue().set(SysEnum.USER.getValue()+loginName,token,10, TimeUnit.MINUTES);
+            return token;
+        }else {
+            return null;
+        }
+    }
 
     @Override
     public UserVO userInfo(String userId) {
