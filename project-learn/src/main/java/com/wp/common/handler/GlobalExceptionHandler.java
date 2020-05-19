@@ -1,13 +1,11 @@
 package com.wp.common.handler;
 
 import com.wp.exception.AuthorityException;
-import com.wp.exception.BaseException;
 import com.wp.exception.NullDataException;
 import com.wp.pojo.dto.HandlerResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;

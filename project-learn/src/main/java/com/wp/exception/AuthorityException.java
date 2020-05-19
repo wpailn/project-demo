@@ -1,7 +1,6 @@
 package com.wp.exception;
 
 import com.wp.pojo.dto.HandlerResult;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
