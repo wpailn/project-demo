@@ -9,7 +9,11 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 public class NullDataException extends BaseException {
     private HandlerResult<String> handlerResult;
+
+    public NullDataException(HandlerResult<String> handlerResult) {
+        super(handlerResult.getMsg());
+        this.handlerResult = handlerResult;
+    }
 }

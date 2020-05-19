@@ -1,5 +1,7 @@
 package com.wp.common.handler;
 
+import com.wp.exception.AuthorityException;
+import com.wp.exception.BaseException;
 import com.wp.exception.NullDataException;
 import com.wp.pojo.dto.HandlerResult;
 import lombok.extern.slf4j.Slf4j;
@@ -20,14 +22,15 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = Exception.class)
     public ResponseEntity<HandlerResult> exceptionHandler(Exception e){
-        log.error("异常信息======>");
-        e.printStackTrace();
         HandlerResult handlerResult;
-        if(e instanceof NullDataException){
+        if(e instanceof AuthorityException){
+            handlerResult = ((AuthorityException) e).getHandlerResult();
+        }else if (e instanceof NullDataException){
             handlerResult = ((NullDataException) e).getHandlerResult();
         }else {
             handlerResult = new HandlerResult<>(false,500,e.getMessage(),null);
         }
+        log.error("异常信息======>{}",e.getMessage());
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(handlerResult);
     }
 }
