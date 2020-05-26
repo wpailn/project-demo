@@ -5,6 +5,7 @@ import com.wp.pojo.po.UserPO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ import java.util.List;
  * 用户dao
  */
 @Mapper
+@Repository
 public interface UserMapper {
     /**
      * 根据userId查询数据库中用户信息
