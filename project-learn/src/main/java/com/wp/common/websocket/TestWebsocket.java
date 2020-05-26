@@ -4,12 +4,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 import javax.websocket.*;
+import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 @Component
-@ServerEndpoint("/websocket")
+@ServerEndpoint("/websocket/{userId}")
 @Slf4j
 public class TestWebsocket {
     private static Map<String, Session> clients = new ConcurrentHashMap<>();
@@ -19,7 +20,7 @@ public class TestWebsocket {
      * @param session session
      */
     @OnOpen
-    public void onOpen(Session session) {
+    public void onOpen(Session session, @PathParam("userId")String userId) {
         //将新用户存入在线的组
         log.info("有新的客户端连接了: {}", session.getId());
         clients.put(session.getId(), session);
