@@ -10,7 +10,7 @@ import java.io.IOException;
 @Slf4j
 public class FirstFilter implements Filter {
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
+    public void init(FilterConfig filterConfig) {
         log.info("初始化过滤器FirstFilter");
     }
 
