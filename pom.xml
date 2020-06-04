@@ -40,6 +40,7 @@
     <java-jwt.version>3.10.2</java-jwt.version>
     <javax.persistence-api.version>2.2</javax.persistence-api.version>
     <pagehelper-starter.version>1.2.13</pagehelper-starter.version>
+    <hutool.version>5.3.5</hutool.version>
   </properties>
 
   <dependencies>
@@ -83,6 +84,11 @@
 
   <dependencyManagement>
     <dependencies>
+      <dependency>
+        <groupId>cn.hutool</groupId>
+        <artifactId>hutool-all</artifactId>
+        <version>${hutool.version}</version>
+      </dependency>
       <dependency>
         <groupId>com.github.pagehelper</groupId>
         <artifactId>pagehelper-spring-boot-starter</artifactId>
