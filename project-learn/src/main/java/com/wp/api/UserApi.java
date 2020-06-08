@@ -56,7 +56,6 @@ public class UserApi {
 
     @RequestMapping(path = "/register",method = RequestMethod.POST)
     @ApiOperation(value = "用户注册", notes = "以json格式发送数据")
-    @CheckToken
     public HandlerResult register(@ApiParam(value = "用户注册信息") @RequestBody @Valid UserDTO user){
         Boolean result = userService.register(user);
         if(result){

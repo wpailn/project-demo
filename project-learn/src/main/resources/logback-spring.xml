@@ -165,12 +165,12 @@
         可以包含零个或多个元素，标识这个appender将会添加到这个logger。
     -->
 
-    <logger name="com.develop.dao" level="debug" additivity="false">
+<!--    <logger name="com.develop.dao" level="debug" additivity="false">
         <appender-ref ref="CONSOLE" />
         <appender-ref ref="INFO_FILE" />
-    </logger>
+    </logger>-->
     <springProfile name="dev">
-        <root level="info">
+        <root level="DEBUG">
             <appender-ref ref="CONSOLE" />
             <appender-ref ref="DEBUG_FILE" />
             <appender-ref ref="INFO_FILE" />
