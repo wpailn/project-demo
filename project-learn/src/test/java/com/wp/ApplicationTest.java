@@ -18,9 +18,6 @@ import java.util.Map;
 
 public class ApplicationTest
 {
-    /**
-     * Rigorous Test :-)
-     */
     @Test
     public void shouldAnswerWithTrue()
     {
