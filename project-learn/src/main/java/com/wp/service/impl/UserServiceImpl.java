@@ -6,7 +6,7 @@ import com.wp.dao.UserMapper;
 import com.wp.pojo.constant.SysEnum;
 import com.wp.pojo.dto.UserDTO;
 import com.wp.pojo.entity.UserDO;
-import com.wp.pojo.po.UserPO;
+import com.wp.pojo.bo.UserBO;
 import com.wp.pojo.vo.UserVO;
 import com.wp.service.UserService;
 import com.wp.util.IdGeneratorUtils;
@@ -49,12 +49,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserVO userInfo(String userId) {
-        UserPO userPO = userMapper.selectUser(userId);
-        if(ObjectUtils.isEmpty(userPO)){
+        UserBO userBO = userMapper.selectUser(userId);
+        if(ObjectUtils.isEmpty(userBO)){
             return null;
         }else {
             UserVO userVO = new UserVO();
-            BeanUtils.copyProperties(userPO,userVO);
+            BeanUtils.copyProperties(userBO,userVO);
             return userVO;
         }
     }

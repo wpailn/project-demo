@@ -1,4 +1,4 @@
-package com.wp.pojo.po;
+package com.wp.pojo.bo;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -10,7 +10,7 @@ import java.util.Date;
  */
 @Getter
 @Setter
-public class UserPO {
+public class UserBO {
     /**
      * 用户名
      */

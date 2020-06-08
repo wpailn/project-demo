@@ -1,7 +1,7 @@
 package com.wp.dao;
 
 import com.wp.pojo.entity.UserDO;
-import com.wp.pojo.po.UserPO;
+import com.wp.pojo.bo.UserBO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -20,7 +20,7 @@ public interface UserMapper {
      * @param userId 用户主键
      * @return 用户信息
      */
-    UserPO selectUser(@Param("userId")String userId);
+    UserBO selectUser(@Param("userId")String userId);
 
     /**
      * 查询所有用户id
