@@ -2,6 +2,7 @@ package com.wp;
 
 import static org.junit.Assert.assertTrue;
 
+import org.apache.commons.lang3.ObjectUtils;
 import org.junit.Test;
 
 /**
@@ -16,6 +17,7 @@ public class ApplicationTest
     @Test
     public void shouldAnswerWithTrue()
     {
-        assertTrue( true );
+        Integer s = ObjectUtils.max(1,2,3);
+        System.out.println(s);
     }
 }
