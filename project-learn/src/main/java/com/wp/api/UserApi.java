@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,7 +29,7 @@ public class UserApi {
     @Resource
     private UserService userService;
 
-    @RequestMapping(path = "/login", method = RequestMethod.POST)
+    @PostMapping(path = "/login")
     @ApiOperation(value = "用户登录获取token", notes = "需要登录名和密码")
     @CheckToken(required = false)
     public HandlerResult<String> login(@RequestParam(value = "loginName") String loginName,
@@ -42,7 +43,7 @@ public class UserApi {
 
     }
 
-    @RequestMapping(path = "/allUserId",method = RequestMethod.GET)
+    @GetMapping(path = "/allUserId")
     @ApiOperation(value = "查询所有用户id", notes = "不需要参数")
     @CheckToken
     public HandlerResult<List<String>> allUserId(){
@@ -54,9 +55,10 @@ public class UserApi {
         }
     }
 
-    @RequestMapping(path = "/register",method = RequestMethod.POST)
+    @PostMapping(path = "/register")
     @ApiOperation(value = "用户注册", notes = "以json格式发送数据")
-    public HandlerResult register(@ApiParam(value = "用户注册信息") @RequestBody @Valid UserDTO user){
+    @CheckToken
+    public HandlerResult register(@ApiParam(value = "用户注册信息") @RequestBody @Valid UserDTO user, BindingResult bindingResult){
         Boolean result = userService.register(user);
         if(result){
             return HandlerResult.success("注册成功");
@@ -65,13 +67,13 @@ public class UserApi {
         }
     }
 
-    @RequestMapping(path = "/userInfo",method = RequestMethod.GET)
+    @GetMapping(path = "/userInfo")
     @ApiOperation(value = "用户查询", notes = "查询参数为用户id")
     @ApiImplicitParams(
             @ApiImplicitParam(name = "userId", value = "用户id",required = true,paramType = "form",dataType = "String")
     )
     @CheckToken
-    public HandlerResult<UserVO> userInfo(@Valid @RequestParam(value = "userId") @NotBlank String userId){
+    public HandlerResult<UserVO> userInfo(@Valid @RequestParam(value = "userId") @NotBlank(message = "userId不能为空") String userId){
         UserVO userVO = userService.userInfo(userId);
         if (ObjectUtils.isEmpty(userVO)){
             return HandlerResult.failed("用户信息查询错误");
