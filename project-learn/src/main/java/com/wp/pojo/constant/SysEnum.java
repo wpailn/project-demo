@@ -6,6 +6,8 @@ import lombok.Getter;
 public enum  SysEnum {
     USER("USER","用户前缀"),
     ROLE("ROLE","角色前缀"),
+    UPLOAD_FILE_ADDR("C:\\file","上传文件地址"),
+    DOWNLOAD_FILE_ADDR("C:\\file","下载文件地址")
     ;
     private String value;
     private String desc;

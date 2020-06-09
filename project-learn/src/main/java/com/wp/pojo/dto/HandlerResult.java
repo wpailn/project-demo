@@ -1,7 +1,7 @@
 package com.wp.pojo.dto;
 
 import com.wp.service.BaseCode;
-import com.wp.service.impl.CommonCode;
+import com.wp.pojo.constant.CommonCode;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
@@ -16,7 +16,7 @@ public class HandlerResult<T> {
     private boolean success;
 
     @ApiModelProperty(value = "应答码")
-    private long code;
+    private String code;
 
     @ApiModelProperty(value = "应答信息")
     private String msg;
@@ -28,7 +28,7 @@ public class HandlerResult<T> {
      * 成功返回信息
      */
     public static <T> HandlerResult<T> success() {
-        return new HandlerResult<T>(true, CommonCode.SUCCESS.getCode(), CommonCode.SUCCESS.getMessage(), null);
+        return new HandlerResult<T>(true, CommonCode.A0000.getCode(), CommonCode.A0000.getMessage(), null);
     }
 
     /**
@@ -37,7 +37,7 @@ public class HandlerResult<T> {
      * @param data 获取的数据
      */
     public static <T> HandlerResult<T> success(T data) {
-        return new HandlerResult<T>(true, CommonCode.SUCCESS.getCode(), CommonCode.SUCCESS.getMessage(), data);
+        return new HandlerResult<T>(true, CommonCode.A0000.getCode(), CommonCode.A0000.getMessage(), data);
     }
 
     /**
@@ -47,7 +47,7 @@ public class HandlerResult<T> {
      * @param  message 提示信息
      */
     public static <T> HandlerResult<T> success(T data, String message) {
-        return new HandlerResult<T>(true, CommonCode.SUCCESS.getCode(), message, data);
+        return new HandlerResult<T>(true, CommonCode.A0000.getCode(), message, data);
     }
 
     /**
@@ -72,21 +72,21 @@ public class HandlerResult<T> {
      * @param message 提示信息
      */
     public static <T> HandlerResult<T> failed(String message) {
-        return new HandlerResult<T>(false, CommonCode.FAILED.getCode(), message, null);
+        return new HandlerResult<T>(false, CommonCode.B0001.getCode(), message, null);
     }
 
     /**
      * 失败返回结果
      */
     public static <T> HandlerResult<T> failed() {
-        return failed(CommonCode.FAILED);
+        return failed(CommonCode.B0001);
     }
 
     /**
      * 参数验证失败返回结果
      */
     public static <T> HandlerResult<T> validateFailed() {
-        return failed(CommonCode.VALIDATE_FAILED);
+        return failed(CommonCode.A0402);
     }
 
     /**
@@ -94,21 +94,21 @@ public class HandlerResult<T> {
      * @param message 提示信息
      */
     public static <T> HandlerResult<T> validateFailed(String message) {
-        return new HandlerResult<T>(false, CommonCode.VALIDATE_FAILED.getCode(), message, null);
+        return new HandlerResult<T>(false, CommonCode.A0402.getCode(), message, null);
     }
 
     /**
      * 未登录返回结果
      */
     public static <T> HandlerResult<T> unauthorized(T data) {
-        return new HandlerResult<T>(false, CommonCode.UNAUTHORIZED.getCode(), CommonCode.UNAUTHORIZED.getMessage(), data);
+        return new HandlerResult<T>(false, CommonCode.A0200.getCode(), CommonCode.A0200.getMessage(), data);
     }
 
     /**
      * 未授权返回结果
      */
     public static <T> HandlerResult<T> forbidden(T data) {
-        return new HandlerResult<T>(false, CommonCode.FORBIDDEN.getCode(), CommonCode.FORBIDDEN.getMessage(), data);
+        return new HandlerResult<T>(false, CommonCode.A0301.getCode(), CommonCode.A0301.getMessage(), data);
     }
 
 }
