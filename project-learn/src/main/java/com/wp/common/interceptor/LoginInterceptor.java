@@ -26,7 +26,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
     private UserMapper userMapper;
 
     @Override
-    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         // 如果不是映射到方法直接通过
         if(!(handler instanceof HandlerMethod)){
             return true;
@@ -35,44 +35,39 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         HandlerMethod handlerMethod=(HandlerMethod)handler;
         Method method=handlerMethod.getMethod();
         //检查是否有CheckToken注释，没有则跳过认证
-        if (method.isAnnotationPresent(CheckToken.class)) {
-            CheckToken checkToken = method.getAnnotation(CheckToken.class);
-            if (checkToken.required()) {
-                //需要校验token
-                String headerToken = request.getHeader("token");
-                if(StringUtils.isBlank(headerToken)){
-                    throw new AuthorityException(HandlerResult.failed("token校验失败"));
-                }else {
-                    String loginName;
-                    try {
-                        loginName = JWT.decode(headerToken).getAudience().get(0);
-                    } catch (JWTDecodeException e) {
-                        throw new AuthorityException(HandlerResult.failed("token校验失败"));
-                    }
-                    if (StringUtils.isBlank(loginName)){
-                        throw new AuthorityException(HandlerResult.failed("token校验失败"));
-                    }else {
-                        String userPassword = userMapper.selectPassword(loginName);
-                        if (StringUtils.isBlank(userPassword)){
-                            throw new AuthorityException(HandlerResult.failed("token校验失败"));
-                        }else {
-                            JWTVerifier jwtVerifier = JWT.require(Algorithm.HMAC256(userPassword)).build();
-                            try {
-                                jwtVerifier.verify(headerToken);
-                            } catch (JWTVerificationException e) {
-                                throw new RuntimeException("401");
-                            }
-                        }
-                    }
-                    return true;
-                }
-            }else {
-                //不需要校验token
-                return true;
-            }
-        }else {
-            //不需要校验token
+        if(!method.isAnnotationPresent(CheckToken.class)){
             return true;
         }
+        CheckToken checkToken = method.getAnnotation(CheckToken.class);
+        if (!checkToken.required()){
+            return true;
+        }
+        //需要校验token
+        String headerToken = request.getHeader("token");
+        if(StringUtils.isBlank(headerToken)){
+            throw new AuthorityException(HandlerResult.failed("token校验失败"));
+        }
+        //登录账户
+        String loginName;
+        try {
+            loginName = JWT.decode(headerToken).getAudience().get(0);
+        } catch (JWTDecodeException e) {
+            throw new AuthorityException(HandlerResult.failed("token校验失败"));
+        }
+        if (StringUtils.isBlank(loginName)){
+            throw new AuthorityException(HandlerResult.failed("token校验失败"));
+        }
+        //用户密码
+        String userPassword = userMapper.selectPassword(loginName);
+        if (StringUtils.isBlank(userPassword)){
+            throw new AuthorityException(HandlerResult.failed("token校验失败"));
+        }
+        JWTVerifier jwtVerifier = JWT.require(Algorithm.HMAC256(userPassword)).build();
+        try {
+            jwtVerifier.verify(headerToken);
+        } catch (JWTVerificationException e) {
+            throw new AuthorityException(HandlerResult.failed("token校验失败"));
+        }
+        return true;
     }
 }
