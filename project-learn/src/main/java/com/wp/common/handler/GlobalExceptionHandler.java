@@ -26,7 +26,7 @@ public class GlobalExceptionHandler {
         }else if (e instanceof NullDataException){
             handlerResult = ((NullDataException) e).getHandlerResult();
         }else {
-            handlerResult = new HandlerResult<>(false,500,e.getMessage(),null);
+            handlerResult = HandlerResult.failed(e.getMessage());
         }
         log.error("异常信息======>{}",e.getMessage());
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(handlerResult);
