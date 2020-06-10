@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title></title>
+</head>
+
+
+<body>
+    <div class="container">
+
+        <div class="head"><span class="title" th:text="${email.theme}"></span>
+        </div>
+
+        <div class="tablebody">
+            <div class="tableTitle"><span th:text="${email.desc}"></span></div>
+            <table border="1" cellspacing="0" cellpadding="0">
+                <thead>
+                <tr>
+                    <td th:each="item : ${email.title}" th:text="${item}"></td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="items : ${email.data}">
+                    <td th:each="item : ${items}" th:text="${item}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="footer">
+            <div>
+                <div>请通过以下链接进行查看</div>
+                <a th:href="${email.url}"><span th:text="${email.url}"></span></a>
+            </div>
+            <div class="tips">此提醒邮件由系统自动发出,请勿直接回复</div>
+            <div class="imf">
+                <div>信息分类: 机密 </div>
+                <div> Information Classification: Confidential</div>
+            </div>
+        </div>
+    </div>
+</body>
+<style>
+    body {
+        background-color: #fff;
+    }
+
+    .container {
+        display: inline-block;
+
+        padding: 16px 24px;
+    }
+
+    .container>div {
+        width: 100%;
+        margin-bottom: 24px;
+
+    }
+
+    .container>div .title {
+        font-size: 24px;
+        color: #409EFF;
+        font-weight: 800;
+    }
+
+    .container>div .tableTitle {
+        font-size: 16px;
+        margin-bottom: 8px;
+
+    }
+
+    .container>div table {
+        border-left: none;
+        border-right: none;
+    }
+
+    table td
+    {
+        border-left: none;
+        border-right: none;
+        text-align: center;
+        height: 40px;
+        width: 200px;
+        line-height: 40px;
+    }
+    thead td{
+        font-weight: 800;
+    }
+    thead td:nth-child(1){
+        width:80px;
+    }
+
+    .container>.footer>div {
+        margin-bottom: 16px;
+    }
+
+    .container>.footer>.tips {
+        margin-top: 40px;
+        margin-bottom: 8px;
+        font-size: 14px;
+        color: rgba(0, 0, 0, .5);
+    }
+
+    .container>.footer .imf {
+        font-size: 12px;
+
+        padding: 8px 0;
+        border-top: 1px solid #ccc;
+        color: rgba(0, 0, 0, .3);
+    }
+
+    .container>div a {
+        color: #409EFF;
+        text-decoration: none;
+    }
+</style>
+</html>
