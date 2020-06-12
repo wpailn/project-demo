@@ -94,7 +94,6 @@ public class MailServiceImpl implements MailService {
         FileSystemResource file = new FileSystemResource(new File(filePath));
         String fileName = filePath.substring(filePath.lastIndexOf(File.separator));
         helper.addAttachment(fileName, file);
-
         mailSender.send(message);
     }
 

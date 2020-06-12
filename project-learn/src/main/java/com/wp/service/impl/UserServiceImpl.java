@@ -2,8 +2,11 @@ package com.wp.service.impl;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.github.pagehelper.PageHelper;
 import com.wp.dao.UserMapper;
 import com.wp.pojo.constant.SysEnum;
+import com.wp.pojo.dto.CommonPage;
+import com.wp.pojo.dto.HandlerResult;
 import com.wp.pojo.dto.UserDTO;
 import com.wp.pojo.entity.UserDO;
 import com.wp.pojo.bo.UserBO;
@@ -81,7 +84,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<String> allUserId() {
-        return userMapper.allUserId();
+    public HandlerResult<CommonPage<String>> allUserId(Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<String> ids = userMapper.allUserId();
+        return HandlerResult.success(CommonPage.restPage(ids));
     }
 }

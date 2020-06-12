@@ -1,9 +1,9 @@
 package com.wp.service;
 
+import com.wp.pojo.dto.CommonPage;
+import com.wp.pojo.dto.HandlerResult;
 import com.wp.pojo.dto.UserDTO;
 import com.wp.pojo.vo.UserVO;
-
-import java.util.List;
 
 /**
  * 用户接口
@@ -34,7 +34,9 @@ public interface UserService {
 
     /**
      * 查询所有用户id
-     * @return 所有用户id
+     * @param pageNum 页数
+     * @param pageSize 每页数量
+     * @return 用户id
      */
-    List<String> allUserId();
+    HandlerResult<CommonPage<String>> allUserId(Integer pageNum, Integer pageSize);
 }

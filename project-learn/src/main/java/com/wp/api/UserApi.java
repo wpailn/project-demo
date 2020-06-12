@@ -1,6 +1,7 @@
 package com.wp.api;
 
 import com.wp.common.annotation.CheckToken;
+import com.wp.pojo.dto.CommonPage;
 import com.wp.pojo.dto.HandlerResult;
 import com.wp.pojo.dto.UserDTO;
 import com.wp.pojo.vo.UserVO;
@@ -16,7 +17,10 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @RestController
@@ -31,34 +35,51 @@ public class UserApi {
 
     @PostMapping(path = "/login")
     @ApiOperation(value = "用户登录获取token", notes = "需要登录名和密码")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "loginName", value = "登陆用户名",required = true,paramType = "form",dataType = "String"),
+            @ApiImplicitParam(name = "loginPass", value = "登陆密码",required = true,paramType = "form",dataType = "String")
+    })
     @CheckToken(required = false)
-    public HandlerResult<String> login(@RequestParam(value = "loginName") String loginName,
-                                       @RequestParam(value = "loginPass") String loginPass){
+    public HandlerResult<String> login(@RequestParam(value = "loginName")
+                                       @NotBlank(message = "不能为空")
+                                       String loginName,
+
+                                       @RequestParam(value = "loginPass")
+                                       @NotBlank(message = "不能为空")
+                                        String loginPass){
         String token = userService.userLogin(loginName, loginPass);
         if (StringUtils.isBlank(token)){
             return HandlerResult.failed("登陆失败");
         }else {
             return HandlerResult.success(token);
         }
-
     }
 
     @GetMapping(path = "/allUserId")
     @ApiOperation(value = "查询所有用户id", notes = "不需要参数")
     @CheckToken
-    public HandlerResult<List<String>> allUserId(){
-        List<String> list = userService.allUserId();
-        if(CollectionUtils.isEmpty(list)){
+    public HandlerResult allUserId(@RequestParam(value = "pageNum")
+                                   @NotNull(message = "不能为空")
+                                   @Min(message = "必须大于0", value = 0)
+                                   @Valid Integer pageNum,
+
+                                   @RequestParam(value = "pageSize")
+                                   @NotNull(message = "不能为空")
+                                   @Min(message = "必须大于0", value = 0)
+                                   @Valid Integer pageSize){
+        HandlerResult<CommonPage<String>> data = userService.allUserId(pageNum,pageSize);
+        if(CollectionUtils.isEmpty(data.getData().getList())){
             return HandlerResult.failed("无数据");
         }else {
-            return HandlerResult.success(list);
+            return HandlerResult.success(data.getData().getList());
         }
     }
 
     @PostMapping(path = "/register")
     @ApiOperation(value = "用户注册", notes = "以json格式发送数据")
     @CheckToken
-    public HandlerResult register(@ApiParam(value = "用户注册信息") @RequestBody @Valid UserDTO user, BindingResult bindingResult){
+    public HandlerResult register(@ApiParam(value = "用户注册信息") @RequestBody @Valid UserDTO user,
+                                  BindingResult bindingResult){
         Boolean result = userService.register(user);
         if(result){
             return HandlerResult.success("注册成功");
@@ -73,7 +94,9 @@ public class UserApi {
             @ApiImplicitParam(name = "userId", value = "用户id",required = true,paramType = "form",dataType = "String")
     )
     @CheckToken
-    public HandlerResult<UserVO> userInfo(@Valid @RequestParam(value = "userId") @NotBlank(message = "userId不能为空") String userId){
+    public HandlerResult<UserVO> userInfo(@Valid @RequestParam(value = "userId")
+                                          @NotBlank(message = "不能为空")
+                                          String userId){
         UserVO userVO = userService.userInfo(userId);
         if (ObjectUtils.isEmpty(userVO)){
             return HandlerResult.failed("用户信息查询错误");

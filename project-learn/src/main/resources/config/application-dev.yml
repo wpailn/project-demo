@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 9090
   undertow:
     io-threads: 16
     worker-threads: 256
