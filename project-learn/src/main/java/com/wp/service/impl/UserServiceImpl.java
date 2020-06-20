@@ -10,7 +10,7 @@ import com.wp.pojo.dto.HandlerResult;
 import com.wp.pojo.dto.UserDTO;
 import com.wp.pojo.entity.UserDO;
 import com.wp.pojo.bo.UserBO;
-import com.wp.pojo.vo.UserVO;
+import com.wp.pojo.dto.UserInfoDTO;
 import com.wp.service.UserService;
 import com.wp.util.IdGeneratorUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -52,14 +52,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserVO userInfo(String userId) {
+    public UserInfoDTO userInfo(String userId) {
         UserBO userBO = userMapper.selectUser(userId);
         if(ObjectUtils.isEmpty(userBO)){
             return null;
         }else {
-            UserVO userVO = new UserVO();
-            BeanUtils.copyProperties(userBO,userVO);
-            return userVO;
+            UserInfoDTO userInfoDTO = new UserInfoDTO();
+            BeanUtils.copyProperties(userBO, userInfoDTO);
+            return userInfoDTO;
         }
     }
 

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>主数据邮件模板</title>
+</head>
+
+
+<body>
+<div class="container">
+
+    <div class="head"><span class="title" th:text="${theme}"></span></div>
+    <div class="msgDetail"><span>以下主数据通过数据管控平台正式发布，请最迟不晚于一个月或当局要求，完成相关系统数据更新。</span></div>
+
+    <div class="tablebody">
+			<div class="tableTitle">结构变化</div>
+			<table cellspacing="0" cellpadding="0">
+			  <thead>
+			    <tr>
+			        <th>序号</th>
+					<th>主数据名称</th>
+					<th>变更类型</th>
+					<th>变更前</th>
+					<th>变更后</th>
+					<th>版本生效时间</th>
+			    </tr>
+			  </thead>
+			  <tbody>
+			  <tr th:each="items : ${structureChangeData}">
+				  <td th:each="item : ${items}" th:text="${item}"></td>
+			  </tr>
+			  </tbody>
+			</table>
+		</div>
+
+    <div class="footer">
+        <div>
+            <div>请通过以下链接进行查看</div>
+            <a th:href="${url}"><span th:text="${url}"></span></a>
+        </div>
+        <div class="tips">此提醒邮件由系统自动发出,请勿直接回复</div>
+        <div class="imf">
+            <div>信息分类: 机密 </div>
+            <div> Information Classification: Confidential</div>
+        </div>
+    </div>
+</div>
+</body>
+<style>
+    body {
+        background-color: #fff;
+    }
+    .container {
+      padding: 16px 24px;
+    }
+    .container>div {
+        width: 100%;
+        margin-bottom: 24px;
+    }
+    .container>div .title {
+        font-size: 24px;
+        color: #409EFF;
+        font-weight: 800;
+    }
+
+    .container>div .msgDetail {
+        font-size: 16px;
+        margin-bottom: 8px;
+
+    }
+		.tableTitle{
+			font-size: 20px;
+			font-weight: 800;
+			height: 40px;
+			line-height: 40px;
+		}
+    .container>div table {
+			width: 100%;
+			margin-bottom: 40px;
+			border-bottom: 1px solid #000;
+    }
+		table th{
+			height: 40px;
+			line-height: 40px;
+			border-top: 1px solid #000;
+		}
+    table td{
+			border-left: none;
+			border-right: none;
+			text-align: center;
+			height: 40px;
+			width: 200px;
+			line-height: 40px;
+			border-top: 1px solid #000;
+    }
+    thead td{
+        font-weight: 800;
+    }
+    
+
+    .container>.footer>div {
+        margin-bottom: 16px;
+    }
+
+    .container>.footer>.tips {
+        margin-top: 40px;
+        margin-bottom: 8px;
+        font-size: 14px;
+        color: rgba(0, 0, 0, .5);
+    }
+
+    .container>.footer .imf {
+        font-size: 12px;
+
+        padding: 8px 0;
+        border-top: 1px solid #ccc;
+        color: rgba(0, 0, 0, .3);
+    }
+
+    .container>div a {
+        color: #409EFF;
+        text-decoration: none;
+    }
+</style>
+</html>

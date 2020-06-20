@@ -3,7 +3,7 @@ package com.wp.service;
 import com.wp.pojo.dto.CommonPage;
 import com.wp.pojo.dto.HandlerResult;
 import com.wp.pojo.dto.UserDTO;
-import com.wp.pojo.vo.UserVO;
+import com.wp.pojo.dto.UserInfoDTO;
 
 /**
  * 用户接口
@@ -23,7 +23,7 @@ public interface UserService {
      * @param userId 用户id
      * @return 用户展示信息
      */
-    UserVO userInfo(String userId);
+    UserInfoDTO userInfo(String userId);
 
     /**
      * 用户注册

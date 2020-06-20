@@ -2,20 +2,15 @@ package com.wp;
 
 import static org.junit.Assert.assertTrue;
 
-import com.google.gson.Gson;
-import com.wp.pojo.bo.UserBO;
-import com.wp.pojo.vo.UserVO;
-import com.wp.util.GsonUtils;
-import org.apache.commons.codec.digest.DigestUtils;
-import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.SystemUtils;
+import cn.hutool.crypto.SecureUtil;
+import cn.hutool.crypto.symmetric.AES;
+import cn.hutool.crypto.symmetric.SymmetricAlgorithm;
 import org.junit.Test;
 
 import java.net.InetAddress;
 import java.net.InterfaceAddress;
 import java.net.NetworkInterface;
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * Unit test for simple App.
@@ -23,6 +18,22 @@ import java.util.stream.Collectors;
 
 public class ApplicationTest
 {
+    @Test
+    public void utilTest(){
+        String content = "test中文";
+
+        String algorithm = SymmetricAlgorithm.AES.getValue();
+        System.out.println(algorithm);
+        //随机生成密钥
+        byte[] key = SecureUtil.generateKey(algorithm).getEncoded();
+        //构建
+        AES aes = SecureUtil.aes(key);
+        //加密
+        byte[] encrypt = aes.encrypt(content);
+        //解密
+        byte[] decrypt = aes.decrypt(encrypt);
+        System.out.println(new String(decrypt));
+    }
     @Test
     public void shouldAnswerWithTrue() throws Exception {
         List<String> macs = getMacList();

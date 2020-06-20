@@ -4,7 +4,7 @@ import com.wp.common.annotation.CheckToken;
 import com.wp.pojo.dto.CommonPage;
 import com.wp.pojo.dto.HandlerResult;
 import com.wp.pojo.dto.UserDTO;
-import com.wp.pojo.vo.UserVO;
+import com.wp.pojo.dto.UserInfoDTO;
 import com.wp.service.UserService;
 import io.swagger.annotations.*;
 import lombok.extern.slf4j.Slf4j;
@@ -17,11 +17,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
-import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
 @RestController
 @RequestMapping(path = "/user")
@@ -94,14 +92,14 @@ public class UserApi {
             @ApiImplicitParam(name = "userId", value = "用户id",required = true,paramType = "form",dataType = "String")
     )
     @CheckToken
-    public HandlerResult<UserVO> userInfo(@Valid @RequestParam(value = "userId")
+    public HandlerResult<UserInfoDTO> userInfo(@Valid @RequestParam(value = "userId")
                                           @NotBlank(message = "不能为空")
                                           String userId){
-        UserVO userVO = userService.userInfo(userId);
-        if (ObjectUtils.isEmpty(userVO)){
+        UserInfoDTO userInfoDTO = userService.userInfo(userId);
+        if (ObjectUtils.isEmpty(userInfoDTO)){
             return HandlerResult.failed("用户信息查询错误");
         }else {
-            return HandlerResult.success(userVO,"用户信息查询成功");
+            return HandlerResult.success(userInfoDTO,"用户信息查询成功");
         }
     }
 }
