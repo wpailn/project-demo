@@ -2,7 +2,7 @@ package com.wp.service;
 
 import com.wp.pojo.dto.CommonPage;
 import com.wp.pojo.dto.HandlerResult;
-import com.wp.pojo.dto.UserDTO;
+import com.wp.pojo.dto.UserRegisterDTO;
 import com.wp.pojo.dto.UserInfoDTO;
 
 /**
@@ -27,10 +27,10 @@ public interface UserService {
 
     /**
      * 用户注册
-     * @param userDTO 用户注册信息
+     * @param userRegisterDTO 用户注册信息
      * @return 注册结果
      */
-    Boolean register(UserDTO userDTO);
+    Boolean register(UserRegisterDTO userRegisterDTO);
 
     /**
      * 查询所有用户id

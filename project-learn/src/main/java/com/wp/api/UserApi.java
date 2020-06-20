@@ -3,7 +3,7 @@ package com.wp.api;
 import com.wp.common.annotation.CheckToken;
 import com.wp.pojo.dto.CommonPage;
 import com.wp.pojo.dto.HandlerResult;
-import com.wp.pojo.dto.UserDTO;
+import com.wp.pojo.dto.UserRegisterDTO;
 import com.wp.pojo.dto.UserInfoDTO;
 import com.wp.service.UserService;
 import io.swagger.annotations.*;
@@ -76,7 +76,7 @@ public class UserApi {
     @PostMapping(path = "/register")
     @ApiOperation(value = "用户注册", notes = "以json格式发送数据")
     @CheckToken
-    public HandlerResult register(@ApiParam(value = "用户注册信息") @RequestBody @Valid UserDTO user,
+    public HandlerResult register(@ApiParam(value = "用户注册信息") @RequestBody @Valid UserRegisterDTO user,
                                   BindingResult bindingResult){
         Boolean result = userService.register(user);
         if(result){

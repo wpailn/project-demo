@@ -7,7 +7,7 @@ import com.wp.dao.UserMapper;
 import com.wp.pojo.constant.SysEnum;
 import com.wp.pojo.dto.CommonPage;
 import com.wp.pojo.dto.HandlerResult;
-import com.wp.pojo.dto.UserDTO;
+import com.wp.pojo.dto.UserRegisterDTO;
 import com.wp.pojo.entity.UserDO;
 import com.wp.pojo.bo.UserBO;
 import com.wp.pojo.dto.UserInfoDTO;
@@ -65,14 +65,14 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public Boolean register(UserDTO userDTO) {
-        if(ObjectUtils.isEmpty(userDTO)){
+    public Boolean register(UserRegisterDTO userRegisterDTO) {
+        if(ObjectUtils.isEmpty(userRegisterDTO)){
             return false;
         }else {
             UserDO userDO = new UserDO();
-            BeanUtils.copyProperties(userDTO,userDO);
+            BeanUtils.copyProperties(userRegisterDTO,userDO);
             try {
-                userDO.setUserBirth(DateUtils.parseDate(userDTO.getUserBirth(),"yyyy-MM-dd"));
+                userDO.setUserBirth(DateUtils.parseDate(userRegisterDTO.getUserBirth(),"yyyy-MM-dd"));
             } catch (ParseException e) {
                 log.info("用户出生日期错误");
             }
