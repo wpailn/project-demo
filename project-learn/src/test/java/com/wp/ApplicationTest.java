@@ -5,8 +5,12 @@ import static org.junit.Assert.assertTrue;
 import cn.hutool.crypto.SecureUtil;
 import cn.hutool.crypto.symmetric.AES;
 import cn.hutool.crypto.symmetric.SymmetricAlgorithm;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Test;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.InterfaceAddress;
 import java.net.NetworkInterface;
@@ -19,20 +23,10 @@ import java.util.*;
 public class ApplicationTest
 {
     @Test
-    public void utilTest(){
-        String content = "test中文";
-
-        String algorithm = SymmetricAlgorithm.AES.getValue();
-        System.out.println(algorithm);
-        //随机生成密钥
-        byte[] key = SecureUtil.generateKey(algorithm).getEncoded();
-        //构建
-        AES aes = SecureUtil.aes(key);
-        //加密
-        byte[] encrypt = aes.encrypt(content);
-        //解密
-        byte[] decrypt = aes.decrypt(encrypt);
-        System.out.println(new String(decrypt));
+    public void utilTest() throws IOException {
+        File file = new File("D:\\file\\license");
+        FileUtils.writeStringToFile(file,"123456");
+        FileUtils.writeStringToFile(file,"abcdefg");
     }
     @Test
     public void shouldAnswerWithTrue() throws Exception {
