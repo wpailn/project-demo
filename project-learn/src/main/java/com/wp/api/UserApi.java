@@ -40,11 +40,11 @@ public class UserApi {
     @CheckToken(required = false)
     public HandlerResult<String> login(@RequestParam(value = "loginName")
                                        @NotBlank(message = "不能为空")
-                                       String loginName,
+                                       @Valid String loginName,
 
                                        @RequestParam(value = "loginPass")
                                        @NotBlank(message = "不能为空")
-                                        String loginPass){
+                                       @Valid String loginPass){
         String token = userService.userLogin(loginName, loginPass);
         if (StringUtils.isBlank(token)){
             return HandlerResult.failed("登陆失败");
