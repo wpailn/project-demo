@@ -34,7 +34,7 @@ public class GlobalExceptionHandler {
             handlerResult = HandlerResult.failed(Objects.requireNonNull(((BindException) e).getBindingResult().getFieldError()).getDefaultMessage());
         }
         handlerResult = HandlerResult.failed(e.getMessage());
-        log.error("异常信息======>{}",e.getMessage());
+        log.error("异常信息======>{}",e.getMessage(),e);
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(handlerResult);
     }
 }

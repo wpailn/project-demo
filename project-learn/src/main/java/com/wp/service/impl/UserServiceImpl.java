@@ -74,7 +74,7 @@ public class UserServiceImpl implements UserService {
             try {
                 userDO.setUserBirth(DateUtils.parseDate(userRegisterDTO.getUserBirth(),"yyyy-MM-dd"));
             } catch (ParseException e) {
-                log.info("用户出生日期错误");
+                log.error("用户出生日期错误======>{}",e.getMessage(),e);
             }
             userDO.setUserId(IdGeneratorUtils.UUID());
             userDO.setCreatTime(new Date());

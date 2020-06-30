@@ -1,0 +1,12 @@
+POST http://localhost:18080/license/createLicense
+Content-Type: application/x-www-form-urlencoded
+
+mac=&effectDays=-20&fileStr=qwe
+
+###
+
+POST http://localhost:18080/license/authLicense
+Content-Type: application/x-www-form-urlencoded
+
+
+###
