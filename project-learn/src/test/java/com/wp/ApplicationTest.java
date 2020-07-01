@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.InterfaceAddress;
 import java.net.NetworkInterface;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 /**
@@ -25,8 +26,8 @@ public class ApplicationTest
     @Test
     public void utilTest() throws IOException {
         File file = new File("D:\\file\\license");
-        FileUtils.writeStringToFile(file,"123456");
-        FileUtils.writeStringToFile(file,"abcdefg");
+        FileUtils.writeStringToFile(file,"123456", StandardCharsets.UTF_8);
+        FileUtils.writeStringToFile(file,"abcdefg", StandardCharsets.UTF_8);
     }
     @Test
     public void shouldAnswerWithTrue() throws Exception {

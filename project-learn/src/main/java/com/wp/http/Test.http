@@ -1,12 +1,24 @@
-POST http://localhost:18080/license/createLicense
+###创建license生成license文件
+POST http://192.168.2.68:18080/license/createLicense
 Content-Type: application/x-www-form-urlencoded
 
-mac=&effectDays=-20&fileStr=qwe
+mac=00-0E-C6-BB-67-63&effectDays=1000
+
+###激活license
+POST http://192.168.2.76:18080/license/actLicense
+Content-Type: application/x-www-form-urlencoded
+
+license=892fdfee2879f8b1339614094063a5a9204cab3cfc375bf31ce080b375785e1ebaf6edea4f1429efcf579152456fbeea3fa1fe912ddfbcab7f2c9c170664b01d8c070754204289c8281590276912b21529e9bf2cc39512694f38b4adbb2c6c9385dc25b7bc284c75be3ec3b8b6e56f24924b39588d79a54729bf8c38b323f6ef
+
+###校验license
+POST http://192.168.2.68:18080/license/authLicense
+Content-Type: application/x-www-form-urlencoded
+
 
 ###
+POST http://localhost:8081/email/test
+Content-Type: application/json
 
-POST http://localhost:18080/license/authLicense
-Content-Type: application/x-www-form-urlencoded
-
+{}
 
 ###
