@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.springframework.http.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Collections;
 import java.util.Map;
 import java.util.Objects;
 
