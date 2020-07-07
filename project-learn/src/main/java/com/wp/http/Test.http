@@ -22,3 +22,30 @@ Content-Type: application/json
 {}
 
 ###
+
+POST http://localhost:18080/activiti/updateApprovalUser
+Content-Type: application/json
+
+{
+  "listActId": ["fe0f6b7956d44434acb88a53f5e55c65","28d5cb570ced404ca48beb494f4f9631"],
+  "listUser": ["U001","U002"]
+}
+
+###
+POST http://192.168.2.68:18080/msg/listDynamic
+Content-Type: application/json
+
+{
+  "userId": "U001",
+  "sourceModule": "基础信息",
+  "content": "测试",
+  "dynamicId": "0a81ea39012a4ced9cabb85e1b33817f",
+  "startDate": "2020-05-27",
+  "endDate": "2020-05-27",
+  "pageNum": 1,
+  "pageSize": 10
+}
+
+###
+
+###
