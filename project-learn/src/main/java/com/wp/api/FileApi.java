@@ -3,7 +3,6 @@ package com.wp.api;
 import com.wp.common.file.FileTransferComponent;
 import com.wp.pojo.constant.SysEnum;
 import com.wp.pojo.dto.HandlerResult;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
