@@ -44,6 +44,7 @@
     <javax.persistence-api.version>2.2</javax.persistence-api.version>
     <pagehelper-starter.version>1.2.13</pagehelper-starter.version>
     <hutool.version>5.3.5</hutool.version>
+    <easyexcel.version>2.2.6</easyexcel.version>
   </properties>
 
   <dependencies>
@@ -180,6 +181,11 @@
         <groupId>mysql</groupId>
         <artifactId>mysql-connector-java</artifactId>
         <version>${mysql-connector.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.alibaba</groupId>
+        <artifactId>easyexcel</artifactId>
+        <version>${easyexcel.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
