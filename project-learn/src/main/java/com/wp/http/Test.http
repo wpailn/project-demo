@@ -47,5 +47,22 @@ Content-Type: application/json
 }
 
 ###
+POST https://intfc.pflife.com.cn:7780/pflife/gylPayInlet/cekgyFourElet.do
+Content-Type: application/json
 
+{
+  "channel": "A0001",
+  "agentCode": "SH100068",
+  "data": {
+    "bankNo": "6227001823260036732",
+    "bankType": "105",
+    "certiType": "0",
+    "certiCode": "441509876512014787",
+    "bankUserName": "吴小龄",
+    "mobileNo": "13602459062"
+  }
+}
+
+
+###
 ###

@@ -19,6 +19,7 @@ import org.springframework.web.client.RestTemplate;
 import springfox.documentation.annotations.ApiIgnore;
 
 import javax.annotation.Resource;
+import java.nio.charset.StandardCharsets;
 
 @RestController
 @RequestMapping(path = "/test")
@@ -40,6 +41,7 @@ public class TestApi {
         Cache<String,String> cache = ehcacheManager.getCacheManager().getCache("foo",String.class,String.class);
         cache.put("123","wp");
         System.out.println(cache.get("123"));
+        String str = "123";
     }
 
     @RequestMapping(path = "/testListener")

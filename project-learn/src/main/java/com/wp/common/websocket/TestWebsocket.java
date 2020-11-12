@@ -13,7 +13,7 @@ import java.util.concurrent.ConcurrentHashMap;
 @ServerEndpoint("/websocket/{userId}")
 @Slf4j
 public class TestWebsocket {
-    private static Map<String, Session> clients = new ConcurrentHashMap<>();
+    private static final Map<String, Session> clients = new ConcurrentHashMap<>();
 
     /**
      * 客户端连接
